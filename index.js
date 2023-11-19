@@ -8,8 +8,6 @@ import { doc, getDoc, setDoc, collection, getDocs, addDoc, query, where } from "
 app.use(express.json()); // JSON verilerini işlemek için
 app.use(express.urlencoded({ extended: true }));
 
-const port = 3000
-
 const map_answers = new MerkleMap()
 const map_user_answers = new MerkleMap()
 
@@ -214,5 +212,3 @@ app.get("/api/get/users_exams", async (req, res) => {
 app.get("/", (req, res) => {
     res.send("hello hackhaton!")
 })
-
-app.listen(port, () => console.log(`Running on http://localhost:${port}/`))
