@@ -1,12 +1,13 @@
-import express, { Router } from "express";
-import serverless from "serverless-http";
+const express = require("express");
+const { Router } = require("express");
+const serverless = require("serverless-http");
+const o1js = require("o1js");
+const { MerkleMap, Poseidon, Field, Struct, PublicKey, PrivateKey, Signature } = o1js;
+const { db, auth } = require("./firebase.js");
+const { doc, getDoc, setDoc, collection, getDocs, addDoc, query, where } = require("firebase/firestore");
 
-export const app = express()
+const app = express()
 const router = express.Router();
-
-import { MerkleMap, Poseidon, Field, Struct, PublicKey, PrivateKey, Signature } from "o1js"
-import { db, auth } from "./firebase.js"
-import { doc, getDoc, setDoc, collection, getDocs, addDoc, query, where } from "firebase/firestore"
 
 app.use(express.json()); // JSON verilerini işlemek için
 app.use(express.urlencoded({ extended: true }));
@@ -216,4 +217,5 @@ router.get("/", (req, res) => {
     res.send("hello hackhaton!")
 })
 
-export const handler = serverless(app);
+module.exports = app
+module.exports.handler = serverless(app);

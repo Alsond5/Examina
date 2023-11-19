@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore, } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
-import dotenv from 'dotenv'
+const { initializeApp } = require("firebase/app");
+const { getFirestore } = require('firebase/firestore');
+const { getAuth } = require('firebase/auth');
+const dotenv = require('dotenv');
 
-dotenv.config()
+dotenv.config();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
