@@ -1,5 +1,7 @@
-import express from "express"
-const app = express()
+import express, { Router } from "express";
+import serverless from "serverless-http";
+
+export const app = express()
 
 import { MerkleMap, Poseidon, Field, Struct, PublicKey, PrivateKey, Signature } from "o1js"
 import { db, auth } from "./firebase.js"
@@ -213,4 +215,4 @@ app.get("/", (req, res) => {
     res.send("hello hackhaton!")
 })
 
-app.listen(80, () => console.log(`Running on http://localhost:80/`))
+export const handler = serverless(app);
