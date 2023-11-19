@@ -212,3 +212,5 @@ app.get("/api/get/users_exams", async (req, res) => {
 app.get("/", (req, res) => {
     res.send("hello hackhaton!")
 })
+
+app.listen(80, () => console.log(`Running on http://localhost:80/`))
