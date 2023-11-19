@@ -2,6 +2,7 @@ import express, { Router } from "express";
 import serverless from "serverless-http";
 
 export const app = express()
+const router = express.Router();
 
 import { MerkleMap, Poseidon, Field, Struct, PublicKey, PrivateKey, Signature } from "o1js"
 import { db, auth } from "./firebase.js"
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 const map_answers = new MerkleMap()
 const map_user_answers = new MerkleMap()
 
-app.post("/api/create/exam", async (req, res) => {
+router.post("/api/create/exam", async (req, res) => {
     if(!req.body) {
         return res.status(500).send("INVALID PARAMETERS")
     }
@@ -58,7 +59,7 @@ app.post("/api/create/exam", async (req, res) => {
     res.json({exam_hash: hash})
 })
 
-app.post("/api/submit", async (req, res) => {
+router.post("/api/submit", async (req, res) => {
     if(!req.body) {
         return res.status(500).send("INVALID PARAMETERS")
     }
@@ -112,7 +113,7 @@ app.post("/api/submit", async (req, res) => {
     res.json({message: "your exam has been successfully recorded", witness: map_user_answers.getWitness(hash)})
 })
 
-app.post("/api/get/answers_witnesses", (req, res) => {
+router.post("/api/get/answers_witnesses", (req, res) => {
     if(!req.body) {
         return res.status(500).send("INVALID PARAMETERS")
     }
@@ -132,7 +133,7 @@ app.post("/api/get/answers_witnesses", (req, res) => {
     res.json({user_answers: user_answers, answers: answers})
 })
 
-app.get("/api/get/exam", async (req, res) => {
+router.get("/api/get/exam", async (req, res) => {
     if (!req.query || !req.query.id) {
         return res.status(500).send("INVALID PARAMETERS")
     }
@@ -168,7 +169,7 @@ app.get("/api/get/exam", async (req, res) => {
     res.json(json_exam)
 })
 
-app.get("/api/get/users_exams", async (req, res) => {
+router.get("/api/get/users_exams", async (req, res) => {
     if (!req.query || !req.query.address) {
         return res.status(500).send("INVALID PARAMETERS")
     }
@@ -211,7 +212,7 @@ app.get("/api/get/users_exams", async (req, res) => {
 
 })
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
     res.send("hello hackhaton!")
 })
 
