@@ -1,13 +1,9 @@
 import express from "express"
 const app = express()
-import cors from 'cors'
 
-import Client from 'mina-signer'
 import { MerkleMap, Poseidon, Field, Struct, PublicKey, PrivateKey, Signature } from "o1js"
 import { db, auth } from "./firebase.js"
 import { doc, getDoc, setDoc, collection, getDocs, addDoc, query, where } from "firebase/firestore"
-
-app.use(cors())
 
 app.use(express.json()); // JSON verilerini işlemek için
 app.use(express.urlencoded({ extended: true }));
@@ -213,6 +209,10 @@ app.get("/api/get/users_exams", async (req, res) => {
 
     res.json({exams: exams})
 
+})
+
+app.get("/", (req, res) => {
+    res.send("hello hackhaton!")
 })
 
 app.listen(port, () => console.log(`Running on http://localhost:${port}/`))
